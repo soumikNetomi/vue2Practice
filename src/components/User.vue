@@ -1,8 +1,9 @@
 <template>
     <div class="userContainer">
+        <h2>* ADD FRUITS *</h2>
         <input type="text" placeholder="Enter Fruit Name"><br>
         <input type="number" placeholder="Enter Quantity"><br>
-        <button class="submit">Submit</button>
+        <button @click="()=>{this.$router.push('/list')}" class="submit">Submit</button>
     </div>
 </template>
 
