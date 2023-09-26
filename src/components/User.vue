@@ -1,25 +1,48 @@
 <template>
     <div class="userContainer">
         <h2>* ADD FRUITS *</h2>
-        <input type="text" placeholder="Enter Fruit Name"><br>
-        <input type="number" placeholder="Enter Quantity"><br>
-        <button @click="()=>{this.$router.push('/list')}" class="submit">Submit</button>
+        <select name="fruits" id="fruits" v-model="fruitId">
+            <option v-for="(ele, index) in this.$store.state.fruits" :key=index :value=index>
+                {{ ele }}
+            </option>
+        </select><br>
+        <input type="number" placeholder="Enter Quantity" v-model="quantity"><br>
+        <button @click="submit()" class="submit">Submit</button>
+        <Total />
     </div>
 </template>
 
 <script>
+import Total from './Total.vue';
 export default {
-    name: "User"
+    name: "User",
+    data() {
+        return {
+            fruitId: 0,
+            quantity: 0,
+        }
+    },
+    methods: {
+        submit() {
+            const payload = { fruitId: this.fruitId, quantity: this.quantity }
+            this.$store.dispatch("addList", payload)
+        }
+    },
+    components: {
+        Total
+    }
 }
 </script>
 
 <style scoped>
-input {
+input,
+select {
     margin-bottom: 20px;
     padding: 5px 10px;
     font-size: 14px;
 }
 
+select:focus,
 input:focus {
     outline: none;
 }
